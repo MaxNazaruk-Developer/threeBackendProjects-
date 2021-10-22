@@ -1,18 +1,36 @@
-# Salesforce DX Project: Next Steps
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+## Job description
+Technical Test – Salesforce Developer
 
-## How Do You Plan to Deploy Your Changes?
+Please set up a test environment and email and work through the tasks outlined. There is no time limit to this test, however you should spend a few hours at most. If you feel stuck at any task, please document your approach within this document. Value code quality over functionality. Use LWC.
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+1. Create a Case from a new incoming email
+Every enquiry from a customer is sent to a specific email address (you can create a fake one for this testing purpose). Link all incoming emails to Salesforce, so that a new Case is created for every enquiry. Incoming emails might have an associated TripID in the format [T#12345] at the bottom of the email.
 
-## Configure Your Salesforce DX Project
+2. Trigger to link an Account to the Case based on TripID
+In order to associate incoming enquiries with the customer, we want to set them based on the TripID.
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+   - 2.1 Schema of architecture
+Every customer can have multiple trips and multiple service tickets associated to them. What objects would you use to map out this architecture and how do they relate to each other? Please create a database schema diagram.  
+   - 2.2 Set customer
+Every incoming email with a TripID in the body of the email should be linked to the customer object (whatever object you’ve chosen in 2.1). What type of relationship have you used and why?
 
-## Read All About It
+3. Lightning web component that displays all trips
+Create a lightning web component on the Case that shows a table of all trips related to the linked customer.
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+4. Extra: Write a scheduled batch class
+Every night we want a bulk job checking all our open Cases that have no customer linked against our TripIDs and set the customer for found matches.
+
+
+Provide please credentials to your test org where we can see the working task
+and GitHub link so we can see the code.
+Thanks.
+## Job performance
+For this task, we used three objects: Account with a custom email field, Case with a custom TripId field, and a custom Trip object.   
+The following block diagram shows the logic of email processing.
+![схема](https://user-images.githubusercontent.com/84872903/138463440-ae37afd4-a2db-4f89-8ee5-53f5238a7220.png)
+
+There was also сreate a lightning web component on the Case that shows a table of all trips related to the linked customer.
+When you load the Case object page, you see a table with three columns: Name Trip - shows the name of the trip, Account Id - shows the id of the tied to this trip account, Date Create - shows the creation date trip
+
+![image](https://user-images.githubusercontent.com/84872903/138464894-cd09fcaa-4477-4ae7-834a-45afbdeae8b3.png)
